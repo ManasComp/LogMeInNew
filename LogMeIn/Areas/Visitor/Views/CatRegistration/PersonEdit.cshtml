@@ -1,0 +1,20 @@
+@using LogMeIn.Utility
+@model LogMeIn.Models.ViewModels.ModelVm
+
+<form method="post" asp-area="Visitor" asp-controller="CatRegistration" asp-action="PersonEdit" class="row" id="formToSubmit">
+    @Html.AntiForgeryToken()
+    @if (User.IsInRole(Roles.RoleAdmin.ToString()))
+    {
+        <a asp-area="Admin" asp-controller="Registration" asp-action="AllItemsByPersonReg" asp-route-personRegistrationId="@Model.PersonRegistrationId">Zpět</a>
+    }
+    else
+    {
+        <a asp-controller="CatRegistration" asp-action="PayInformation" asp-route-personRegistrationId="@Model.PersonRegistrationId">Zpět</a>
+    }
+
+    <input asp-for="@Model.PersonRegistrationId" type="hidden"/>
+    <partial name="_PersonPartial" Model="@Model"/>
+    <button type="submit" class="btn btn-primary form-control " id="myButton">
+        Dokončit
+    </button>
+</form>

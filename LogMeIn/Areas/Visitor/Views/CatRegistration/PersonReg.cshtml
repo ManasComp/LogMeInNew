@@ -1,0 +1,40 @@
+@using LogMeIn.Utility
+@model  LogMeIn.Models.ViewModels.ModelVm
+
+<nav class="navbar sticky-top navbar-light bg-light px-3" data-bs-spy="scroll" sticky-top id="navbar-example2">
+    <a class="navbar-brand" href="#"></a>
+    @if (User.IsInRole(Roles.RoleAdmin.ToString()))
+    {
+        <a asp-area="Admin" asp-controller="Registration" asp-action="AllItemsByPersonReg" asp-route-personRegistrationId="@Model.PersonRegistrationId">Zpět</a>
+    }
+    else
+    {
+        <a asp-controller="CatRegistration" asp-action="PayInformation" asp-route-personRegistrationId="@Model.PersonRegistrationId">Zpět</a>
+    }
+    <a asp-controller="CatRegistration" asp-action="PersonEdit" asp-route-personRegId="@Model.PersonRegistrationId">Upravit</a>
+</nav>
+
+
+<div class="row">
+    <section id="scrollspyHeading1" class="row">
+        <h2 class="text-center">Vystavovatel</h2>
+        <partial name="_PersonPartial" Model="@Model"/>
+        <hr style="  border-top: 8px solid #000000;
+                                         border-radius: 5px;">
+    </section>
+</div>
+
+
+@section Scripts {
+    <script>
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2({
+    placeholder: "Vyberte...",
+    minimumResultsForSearch: -1,
+     disabled: @Model.Disabled.ToString().ToLower()
+    });
+    });
+
+    
+    </script>
+}

@@ -1,0 +1,115 @@
+@model LogMeIn.Models.ViewModels.ExhibitedCatVm
+
+
+<div class="form-bacground">
+    <h1 class="text-center fs-4">Registrace na výstavu</h1>
+    <div id="signUpForm" method="post" class="row" enctype="multipart/form-data">
+        <div class="step">
+            @await Html.PartialAsync("_RegistrationPartial", Model.IsHomeCatSet)
+            <h1 class="text-center">Kočka</h1>
+            <form method="post" asp-area="Visitor" asp-controller="CatRegistration" asp-action="UpsertCat" class="row" id="formToSubmit">
+                @Html.AntiForgeryToken()
+                <input asp-for="@Model.CatRegistrationId" type="hidden"/>
+                <input asp-for="@Model.StepId" type="hidden"/>
+                <input asp-for="@Model.BreederId" type="hidden"/>
+                <input asp-for="@Model.CatId" type="hidden"/>
+                <input asp-for="@Model.editting" type="hidden"/>
+                <partial name="_ExhibitedPartial" Model="@Model"/>
+                <partial name="_buttonsPArtial" Model="@Model"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* <form method="post" asp-area="Visitor" asp-controller="Test" asp-action="Index" class="row"> *@
+@* *@
+@*     <div class="row py-3 col-md-6 align-items-center justify-content-center"> *@
+@*         <div class="col-md-4 col-5"> *@
+@*             <label >Kompletní účast</label> *@
+@*         </div> *@
+@*         <div class="form-floating col-md-8 col-7"> *@
+@*             <input asp-for="@Model.Email"/> *@
+@*             <span asp-validation-for="@Model.Email" class="text-danger"></span> *@
+@*         </div> *@
+@*         <button type="submit">submit</button> *@
+@*     </div> *@
+@* *@
+@* </form> *@
+
+@section Scripts {
+    <partial name="_sciptPartial" Model="@Model.StepId"/>
+    <script>
+    // JavaScript
+    const toggleButton = document.getElementById('toggleButton');
+    const targetElement = document.getElementById('targetElement');
+
+    const nameInput = document.getElementById("Breeder.name");
+    const surnameInput = document.getElementById("Breeder.surname");
+    const countryInput = document.getElementById("Breeder.country");
+    
+    const emsInput = document.getElementById("emsInput");
+    const group = document.getElementById("group");
+    const groupInput = document.getElementById("groupInput");
+    
+    function toggleElementVisibility() {
+        if (toggleButton.checked) {
+            nameInput.value = '';
+            surnameInput.value = '';
+            countryInput.value = '';
+            targetElement.classList.remove("show");
+            targetElement.classList.add("hide");
+            setTimeout(() => {  targetElement.style.display = 'none'; }, 500);
+        } else {
+            targetElement.style.display = 'block';
+            targetElement.classList.remove("hide");
+             targetElement.classList.add("show");
+        }
+    }
+    
+    function check(input){
+                const val = input.toLowerCase();
+                const x = val.includes("mc ") || val.includes("rag ");
+                return !x;
+        }
+
+    function checkGroup(e) {
+
+         if (check(e.target.value)) {
+            groupInput.value = '';
+            group.classList.remove("show");
+            group.classList.add("hide");
+            setTimeout(() => {  group.style.display = 'none'; }, 500);
+        } else {
+            group.style.display = 'flex';
+            group.classList.remove("hide");
+             group.classList.add("show");
+        }
+    }
+
+    toggleButton.addEventListener('change', toggleElementVisibility);
+    emsInput.addEventListener('input', checkGroup);
+
+    targetElement.style.display = toggleButton.checked ? 'none' : 'block';
+    group.style.display = check(emsInput.value) ? 'none' : 'flex';
+
+
+        $.validator.setDefaults({
+           onkeyup: false
+        })
+        
+        
+
+        
+    // flatpickr.localize(flatpickr.l10ns.cz);    
+    // flatpickr(".flatpickr", {
+    //     dateFormat: "d-m-Y",
+    //     showAlways: false,
+    //     altInput: true,
+    //     maxDate: "today",
+    //     wrap: true
+    // });
+    //    
+
+
+    </script>
+}

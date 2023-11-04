@@ -1,0 +1,28 @@
+﻿services:
+  logmein:
+    container_name: logmein
+    image: logmein
+    build:
+      context: .
+      dockerfile: LogMeIn/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Database=postgres;Username=postgres;Password=postgres"
+    depends_on:
+      - db
+  
+  db:
+    container_name: db
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}

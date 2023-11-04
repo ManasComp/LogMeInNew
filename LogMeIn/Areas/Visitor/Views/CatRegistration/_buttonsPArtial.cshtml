@@ -1,0 +1,33 @@
+@model LogMeIn.Models.ViewModels.Step
+
+
+<div class="row">
+    <div class="col-6">
+        @if (Model.StepId > 0)
+        {
+            <a asp-area="Visitor" asp-controller="CatRegistration" asp-action="ResolvePage" asp-route-index="@(Model.StepId - 1)" asp-route-catRegistrationId="@Model.CatRegistrationId"
+               class="btn btn-outline-secondary form-control text-center ">
+                Předchozí
+            </a>
+        }
+    </div>
+
+    <div class="col-6">
+        @if (Model is { isHomeCat: true,StepId: < 2 } or { isHomeCat: false,StepId: < 4 })
+        {
+            <button type="submit" class="btn btn-primary form-control " id="myButton">
+                Další
+            </button>
+        }
+        else
+        {
+            @* <a onClick="Redirect('/Visitor/CatRegistration/PayInformation')" class="btn btn-primary form-control"> *@
+            @*     <i class="bi bi-credit-card"></i> *@
+            @*     <b>Zaplatit</b> *@
+            @* </a> *@
+            <button type="submit" class="btn btn-primary form-control " id="myButton">
+                Dokončit
+            </button>
+        }
+    </div>
+</div>

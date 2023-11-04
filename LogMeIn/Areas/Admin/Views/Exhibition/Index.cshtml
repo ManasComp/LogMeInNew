@@ -1,0 +1,41 @@
+@model List<Exhibition>
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header ml-0 py-3">
+        <div class="col-12 text-center">
+            <h2 class="py-2">Exhibitions List</h2>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="container">
+            <div class="row pb-3">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-controller="Exhibition" asp-action="Upsert"
+                       class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Create new exhibition
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Organization</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Place</th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/exhibition.js"></script>
+}

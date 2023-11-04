@@ -1,0 +1,96 @@
+@model CatRegistration
+
+
+<div class="row">
+    <div class="col-md-6  py-3">
+        <h4>Informace o vystavované kočce</h4>
+        <p>
+            <strong>Jméno:</strong> @(Model.Cat.TitleBeforeName + " " + Model.Cat.Name + " " + Model.Cat.TitleAfterName)
+        </p>
+        <p>
+            <strong>EMS:</strong> @Model.Cat.Ems
+        </p>
+        <p>
+            <strong>Chovatel:</strong> @Model.Cat.Breed
+        </p>
+        <p>
+            <strong>Barva:</strong> @Model.Cat.Colour
+        </p>
+        <p>
+            <strong>Číslo plemenné knihy:</strong> @Model.Cat.PedigreeNumber
+        </p>
+        <p>
+            <strong>Datum narození:</strong> @Model.Cat.BirthDate.ToString("dd. MM. yyyy")
+        </p>
+        <p>
+            <strong>Pohlaví:</strong> @Model.Cat.Sex
+        </p>
+        <p>
+            <strong>Vykastrovaná:</strong> @Model.Cat.Neutered
+        </p>
+        <p>
+            <strong>Skupina:</strong> @Model.Cat.Group
+        </p>
+    </div>
+
+    <div class="col-md-6  py-3">
+        <h4>Informace o chovateli</h4>
+        <p>
+            <strong>Křestní jméno:</strong> @(Model.Cat.Breeder.FirstName ?? Model.PersonRegistration.Exhibiter.FirstName)
+        </p>
+        <p>
+            <strong>Přijmení:</strong> @(Model.Cat.Breeder.LastName ?? Model.PersonRegistration.Exhibiter.LastName)
+        </p>
+        <p>
+            <strong>Země:</strong> @(Model.Cat.Breeder.Country ?? Model.PersonRegistration.Exhibiter.Country)
+        </p>
+    </div>
+
+    @if (!Model.Cat.IsHomeCat)
+    {
+        <div class="col-md-6  py-3">
+            <h4>Informace o matce</h4>
+            <p>
+                <strong>Jméno:</strong> @(Model.Cat.Mother.TitleBeforeName + " " + Model.Cat.Mother.Name + " " + Model.Cat.Father.TitleAfterName)
+            </p>
+            <p>
+                <strong>EMS:</strong> @Model.Cat.Mother.Ems
+            </p>
+            <p>
+                <strong>Číslo plemenné knihy:</strong> @Model.Cat.Mother.PedigreeNumber
+            </p>
+            <p>
+                <strong>Chovatel:</strong> @Model.Cat.Mother.Breed
+            </p>
+            <p>
+                <strong>Barva:</strong> @Model.Cat.Mother.Colour
+            </p>
+        </div>
+
+        <div class="col-md-6 py-3">
+            <h4>Informace o otci</h4>
+            <p>
+                <strong>Jméno:</strong> @(Model.Cat.Father.TitleBeforeName + " " + Model.Cat.Father.Name + " " + Model.Cat.Father.TitleAfterName)
+            </p>
+            <p>
+                <strong>EMS:</strong> @Model.Cat.Father.Ems
+            </p>
+            <p>
+                <strong>Číslo plemenné knihy:</strong> @Model.Cat.Father.PedigreeNumber
+            </p>
+            <p>
+                <strong>Chovatel:</strong> @Model.Cat.Father.Breed
+            </p>
+            <p>
+                <strong>Barva:</strong> @Model.Cat.Father.Colour
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-6  py-3">
+            Infomace o rodičích nejsou k dispozici
+        </div>
+    }
+
+</div>

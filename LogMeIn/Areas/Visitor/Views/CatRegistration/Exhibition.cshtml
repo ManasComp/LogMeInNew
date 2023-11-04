@@ -1,0 +1,50 @@
+@model LogMeIn.Models.ViewModels.ExhibitionVm
+
+<div class="form-bacground">
+    <div id="signUpForm" method="post" class="row" enctype="multipart/form-data">
+        <div class="step">
+
+            @await Html.PartialAsync("_RegistrationPartial", Model.isHomeCat)
+            <h1 class="text-center">Registrace</h1>
+
+            <form method="post" asp-area="Visitor" asp-controller="CatRegistration" asp-action="UpsertExhibition" class="row">
+                @Html.AntiForgeryToken()
+                <input asp-for="@Model.CatRegistrationId" type="hidden"/>
+                <input asp-for="@Model.StepId" type="hidden"/>
+                <input asp-for="@Model.Groups" type="hidden"/>
+                <input asp-for="@Model.editting" type="hidden"/>
+                <partial name="_ExhibitionParital" Model="@Model"/>
+                <partial name="_buttonsPArtial" Model="@Model"/>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    const button = document.getElementById("myButton");
+
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            placeholder: "Vyberte si kategorii",
+            allowClear: true,
+            closeOnSelect: true,
+            dropdownAutoWidth: true,
+            scrollAfterSelect: true,
+        });
+    });
+    
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2({
+                placeholder: "Vyberte...",
+                minimumResultsForSearch: -1
+            });
+        });
+    
+    </script>
+
+
+    <partial name="_sciptPartial" Model="@Model.StepId"/>
+    <partial name="_ExhibitionScript" Model="@Model"/>
+}

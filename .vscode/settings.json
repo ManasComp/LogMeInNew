@@ -1,0 +1,8 @@
+{
+    "dotnet.defaultSolution": "LogMeIn.sln",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#2D3002",
+        "titleBar.activeBackground": "#3F4302",
+        "titleBar.activeForeground": "#FAFDCF"
+    }
+}

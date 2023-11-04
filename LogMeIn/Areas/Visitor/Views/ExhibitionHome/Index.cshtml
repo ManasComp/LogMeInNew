@@ -1,0 +1,98 @@
+@model Exhibition
+
+<div class="container">
+    <div class="row text-center">
+        <div class="p-5">
+            <h1 class="text-primary">@Model.Name</h1>
+            <a href="@Model.Organization.Website" class="text-muted">
+                <h2>@Model.Organization.Name</h2>
+            </a>
+        </div>
+
+        <a href="@Model.Url" type="button" class="btn btn-outline-info">
+            <i class="bi bi-paperclip h2"></i>
+            <h2>Informační leták</h2>
+        </a>
+    </div>
+    <div class="row text-center justify-content-center">
+
+        <div class="row py-3 col-md-6 align-items-center justify-content-center">
+            <div class="col-3 col-sm-2 align-items-center p-0">
+                <i class="bi bi-calendar3 h1" style="color: red"></i>
+            </div>
+            <div class="col-5 col-sm-4 text-center">
+                Datum:
+                <h5> @Model.StartDate.Day.ToString() - @Model.EndDate.ToString("dd. MM. yyyy")</h5>
+            </div>
+        </div>
+
+        <div class="row py-3 col-md-6 align-items-center justify-content-center">
+            <div class="col-3 col-sm-2 align-items-center p-0">
+                <i class="bi bi-clock h1" style="color: red"></i>
+            </div>
+            <div class="col-5 col-sm-4 text-center">
+                Přihlásit do:
+                <h5>@Model.RegistrationEnd.ToString("dd. MM. yyyy")</h5>
+            </div>
+        </div>
+
+
+        <div class="row py-3 col-md-6 align-items-center justify-content-center">
+            <div class="col-3 col-sm-2 align-items-center p-0">
+                <i class="bi bi-telephone-fill h1" style="color: red"></i>
+            </div>
+            <div class="col-5 col-sm-4 text-center">
+                Telefon:
+                <h5>
+                    <a href="tel:@Model.Organization.TelNumber">@Model.Organization.TelNumber</a>
+                </h5>
+            </div>
+        </div>
+
+        <div class="row py-3 col-md-6 align-items-center justify-content-center">
+            <div class="col-3 col-sm-2 align-items-center p-0">
+                <i class="bi bi-envelope-at-fill h1" style="color: red"></i>
+            </div>
+            <div class="col-5 col-sm-4 text-center">
+                Email:
+                <h5>
+                    <a href="mailto:@Model.Organization.Email">@Model.Organization.Email</a>
+                </h5>
+            </div>
+        </div>
+
+        <div class="row py-3 col-md-6 align-items-center justify-content-center">
+            <div class="col-3 col-sm-2 align-items-center p-0">
+                <i class="bi bi-geo-alt-fill h1" style="color: red"></i>
+            </div>
+
+            <div id="copyButton" title="Click to copy" style="text-align: center;" class="col-5 col-sm-4  text-center img-fluid">
+                Kde:
+                <h5 >@Model.Location.Address</h5>
+                <div class="text-muted">
+                    @Model.Location.North N
+                    <br/>
+                    @Model.Location.South E
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row col-sm-6 text-muted">
+            @* <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.579328361026!2d16.590477177555623!3d49.227504574658596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471294086696c501%3A0xa9aa44414edd0f94!2sPalack%C3%A9ho%20t%C5%99.%20832%2F126%2C%20612%2000%20Brno-Kr%C3%A1lovo%20Pole!5e0!3m2!1scs!2scz!4v1694191197836!5m2!1scs!2scz" style="border:0; width: 100vw; allowfullscreen="true"; loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> *@
+            <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.579328361026!2d16.590477177555623!3d49.227504574658596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471294086696c501%3A0xa9aa44414edd0f94!2sPalack%C3%A9ho%20t%C5%99.%20832%2F126%2C%20612%2000%20Brno-Kr%C3%A1lovo%20Pole!5e0!3m2!1scs!2scz!4v1694192088116!5m2!1scs!2scz"style="border:0; width: 100vw;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+    </div>
+
+
+    <div class="col-sm-12 row p-3 justify-content-center align-items-center">
+        <a class="btn btn-primary" asp-area="Visitor" asp-action="RegistrateOrLogin" asp-route-returnUrl="/Visitor/CatRegistration/CreateCatRegistration">
+            @* @($"{Context.Request.Path}{Context.Request.QueryString}") *@
+            <h1>Registruj mě!</h1>
+        </a>
+        @* <div class="w-25 justify-content-center align-items-center text-center" style="align-self: center"> *@
+        @*     <img src="https://cdn.pixabay.com/photo/2023/04/03/06/32/cat-7896080_640.png" class="img-fluid align-items-center" alt=""/> *@
+        @* </div> *@
+    </div>
+</div>

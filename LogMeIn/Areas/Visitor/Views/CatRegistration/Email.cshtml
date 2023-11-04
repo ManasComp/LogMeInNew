@@ -1,0 +1,9 @@
+@model LogMeIn.Areas.Visitor.Controllers.CatRegistrationController.InvoiceVm
+
+<partial name="Person" Model="@Model.PersonVm"/>
+
+@foreach (var cat in Model.CatRegistrations)
+{
+    <hr style="  border-top: 14px solid #000000;border-radius: 8px;">
+    <partial name="Cat" Model="@cat"/>
+}

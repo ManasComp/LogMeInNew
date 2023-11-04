@@ -1,0 +1,30 @@
+@model LogMeIn.Models.ViewModels.PayInfoVm
+
+
+<div class="form-bacground">
+    <div id="signUpForm" method="post" class="row" enctype="multipart/form-data">
+        <div class="step">
+            <form method="post" asp-area="Visitor" asp-controller="CatRegistration" asp-action="PayInformation" class="row">
+                <h1 class="text-center">Platba</h1>
+                <a href=@("/Visitor/CatRegistration/DeletePerson/" + Model.PersonRegID)>Smazat vše</a>
+                @Html.AntiForgeryToken()
+                <input asp-for="@Model.PersonRegID" type="hidden"/>
+                <partial name="_ViewPartial" Model="@Model"/>
+
+                <a class="btn btn-outline-primary" asp-area="Visitor" asp-controller="ExhibitionHome" asp-action="RegistrateOrLogin" asp-route-returnUrl="/Visitor/CatRegistration/CreateCatRegistration">
+                    Registrovat další kočku
+                </a>
+
+                Registrace bude platná až po úspěšném uhrazení startovného. Pro zaslání platby ve výši @(Model.TotalPrice) Kč použijte bankovní účet 2600780927/201. Do dvou pracovnách dnů vám přijde potvrzení o přijaté platbě, pokud ne, tak nás kontakte. Ve zprávě pro příjemce nezapomeňte uvést následující text:
+
+                <div class="row">
+                    <input disabled="disabled" value="@Model.Messahge"/>
+                </div>
+                <button type="submit" class="btn btn-primary form-control " id="myButton">
+                    Se vším souhlasím, chci se registrovat
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>

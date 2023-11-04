@@ -1,0 +1,34 @@
+@using LogMeIn.Models
+@model  LogMeIn.Models.ViewModels.CatVm
+
+<div class="form-bacground">
+    <div id="signUpForm" method="post" class="row" enctype="multipart/form-data">
+        <div class="step">
+            @await Html.PartialAsync("_RegistrationPartial", Model.isHomeCat)
+            <h1 class="text-center">
+                @if (Model.Gender == Gender.Female)
+                {
+                    <h3 class="text-center"><i class="bi bi-gender-female"> </i> Matka </h3>
+                }
+                else
+                {
+                    <h3 class="text-center"><i class="bi bi-gender-male"> </i> Otec </h3>
+                }
+            </h1>
+            <form method="post" asp-area="Visitor" asp-controller="CatRegistration" asp-action="UpsertParent" class="row" id="formToSubmit">
+                @Html.AntiForgeryToken()
+                <input asp-for="@Model.CatRegistrationId" type="hidden"/>
+                <input asp-for="@Model.StepId" type="hidden"/>
+                <input asp-for="@Model.CatId" type="hidden"/>
+                <input asp-for="@Model.Gender" type="hidden"/>
+                <input asp-for="@Model.editting" type="hidden"/>
+                <partial name="_CatPartial" Model="@Model"/>
+                <partial name="_buttonsPArtial" Model="@Model"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_sciptPartial" Model="@Model.StepId"/>
+}

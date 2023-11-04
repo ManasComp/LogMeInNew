@@ -1,0 +1,80 @@
+@model List<LogMeIn.Models.ViewModels.RecordVm> 
+
+<div class="row col-8">
+    <div class="col-4">
+        <a href="/admin/registration/getall">
+            <button class="btn btn-outline-primary">Vrátit jako JSON</button>
+        </a>
+    </div>
+
+    <div class="col-4">
+        <a href="/admin/registration/GetAllAsCsv">
+            <button class="btn btn-outline-primary">Vrátit jako CSV</button>
+        </a>
+    </div>
+</div>
+
+
+<table id="example" class="display is-striped nowrap" style="width:100%">
+    <thead>
+    <tr>
+        <th scope="col">Odesláno</th>
+        <th scope="col"> Jméno</th>
+        <th scope="col">Přijmení</th>
+        <th scope="col">Počet koček</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefonní číslo</th>
+        <th scope="col">Zaplaceno</th>
+        <th scope="col">Zobrazit</th>
+        @* <th></th> *@
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td data-priority="1">@item.Submitted</td>
+            <td>@item.Name</td>
+            <td>@item.Surname</td>
+            <td>@item.NumberOFcats</td>
+            <td>@item.email</td>
+            <td>@item.phone</td>
+            <td>@item.paid</td>
+            <td>
+                <a asp-area="Admin" asp-controller="Registration" asp-action="AllItems" asp-route-catRegistrationId="@item.Id">Zobrazit</a>
+            </td>
+            @* <td data-priority="2"> *@
+            @*     <div class="row" style="width:150px;">  *@
+            @*         <a href="/Admin/exhibition/Upsert?id=${data}" class="btn btn-primary mx-2 col-3"> *@
+            @*             <small><i class="bi bi-pencil-square"></i> </small> *@
+            @*             $1$ Upravit #1# *@
+            @*         </a> *@
+            @*         <a onClick="Delete('/Admin/Product/delete?id=${data}')" class="btn btn-info col-3"> *@
+            @*             <small><i class="bi bi-save-fill"></i></small> *@
+            @*             $1$ Export #1# *@
+            @*         </a> *@
+            @*         <a onClick="Delete('/Admin/Product/delete?id=${data}')" class="btn btn-danger mx-2 col-3"> *@
+            @*             <small><i class="bi bi-trash-fill"></i></small> *@
+            @*             $1$ Odstranit #1# *@
+            @*         </a> *@
+            @*     </div> *@
+            @* </td> *@
+        </tr>
+    }
+    <tfoot>
+    </tfoot>
+</table>
+
+@section Scripts {
+    <script>
+        var table = new DataTable('#example', {
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/cs.json',
+            },
+            fixedHeader: true,
+            responsive: true,
+            scroller: true,
+            select: true,
+        });
+    </script>
+}

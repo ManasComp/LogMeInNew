@@ -1,0 +1,58 @@
+@using LogMeIn.Models.ViewModels
+@model LogMeIn.Models.ViewModels.StepVm<CatRegistration>
+
+<div class="form-bacground">
+    <div id="signUpForm" method="post" class="row" enctype="multipart/form-data">
+        <div class="step">
+            <form method="post" asp-area="Visitor" asp-controller="CatRegistration" asp-action="Summary" class="row">
+                @Html.AntiForgeryToken()
+                @await Html.PartialAsync("_RegistrationPartial", Model.Data.Cat.IsHomeCat)
+
+
+                <div class="text-center justify-content-center">
+                    <h1 class="text-center justify-content-center align-items-center">Registrace</h1>
+                    <h2 >Rekapitulace</h2>
+                    <div class="py-3 align-items-center justify-content-center text-center">
+                        <div class="text-center text-bg-primary p-2">
+                            <h4>
+                                Celková cena za registraci kočky:
+                                <b id="TotalPrice">
+                                    @Model.Data.Price Kč
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+
+                <input asp-for="@Model.RegistrationId" type="hidden"/>
+                <input asp-for="@Model.StepId" type="hidden"/>
+                <partial name="_SummaryPartional" Model="@Model.Data"/>
+                <partial name="_buttonsPArtial" Model="@(new Step { CatRegistrationId = Model.Data.Id, StepId = Model.StepId, isHomeCat = Model.Data.Cat.IsHomeCat })"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_sciptPartial" Model="@Model.StepId"/>
+
+    <script>
+            function Redirect(url) {
+                // Swal.fire({
+                //     title: 'Je vše dobře?',
+                //     text: "Po odeslání nelze data vrátit zpět!",
+                //     icon: 'warning',
+                //     showCancelButton: true,
+                //     confirmButtonColor: '#3085d6',
+                //     cancelButtonColor: '#d33',
+                //     confirmButtonText: 'Ano, pokračovat k platbě!'
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //       window.location.href = url;
+                //     }
+                // })
+            }
+        </script>
+}

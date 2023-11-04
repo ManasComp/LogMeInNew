@@ -1,0 +1,27 @@
+
+@model LogMeIn.Models.ViewModels.StepVm<LogMeIn.Areas.Visitor.Controllers.TrestModel>
+
+<form method="post" asp-area="Visitor" asp-controller="Test" asp-action="Index" class="row">
+
+    <div class="row py-3 col-md-6 align-items-center justify-content-center">
+        <div class="col-md-4 col-5">
+            <label >Kompletní účast</label>
+        </div>
+        <div class="form-floating col-md-8 col-7">
+            <input asp-for="@Model.Data.Email"/>
+            <span asp-validation-for="@Model.Data.Email" class="text-danger"></span>
+        </div>
+        <button type="submit">submit</button>
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+    <script>
+        $.validator.setDefaults({
+           onkeyup: false
+        })
+    </script>
+
+}

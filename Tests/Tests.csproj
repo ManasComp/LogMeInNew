@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.2" />
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
+        <PackageReference Include="PuppeteerSharp" Version="11.0.6"/>
+        <PackageReference Include="xunit.assert" Version="2.5.1" />
+        <PackageReference Include="xunit.extensibility.core" Version="2.5.1" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <ProjectReference Include="..\LogMeIn\LogMeIn.csproj"/>
+    </ItemGroup>
+
+</Project>

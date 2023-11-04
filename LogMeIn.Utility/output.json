@@ -1,0 +1,62 @@
+{
+  "class": 9,
+  "group": 8,
+  "note": "",
+  // Empty string or do not write at all
+  "animal": {
+    "name": "Lucinka Lotka Z Klajdovky",
+    "title": "",
+    // Empty string or do not write at all
+    "country": "CZ",
+    // ISO 3166-1 alpha-2 country codes
+    "ems": "MCO f 22",
+    "breed": "britská krátkosrstá",
+    "color": "modrá",
+    "pedigreeNumber": "(CZ)ČSCH LO 594/10/MCO",
+    "birthDate": "2010-05-27",
+    // ISO 8601
+    "sex": "female",
+    "neutered": true,
+    "mother": {
+      "name": "Sweet Lady Susan Honey Pie",
+      "title": "GIC",
+      "country": "CZ",
+      // ISO 3166-1 alpha-2 country codes
+      "ems": "BRI g",
+      "pedigreeNumber": "(CZ)ČSCH LO 809/11/BRI",
+      "breed": "britská krátkosrstá",
+      "color": "modroželvovinová"
+    },
+    "father": {
+      "name": "Denis Rosso lilla",
+      "title": "CH",
+      "country": "CZ",
+      // ISO 3166-1 alpha-2 country codes
+      "ems": "BRI c",
+      "pedigreeNumber": "(CZ)ČSCH LO 659/10/BRI",
+      "breed": "britská krátkosrstá",
+      "color": "lilová"
+    },
+    "breeder": {
+      "firstName": "Hana",
+      "lastName": "Kostelecká Šulcová",
+      "country": "CZ"
+      // ISO 3166-1 alpha-2 country codes
+    }
+  },
+  "exhibitor": {
+    "firstName": "Eva",
+    "lastName": "Hladká",
+    "phone": "+420605262990",
+    "email": "eva@fi.muni.cz",
+    "street": "Kabtníkova",
+    "houseNumber": "9",
+    "city": "Brno",
+    "zip": "602 00",
+    "country": "CZ",
+    // ISO 3166-1 alpha-2 country codes
+    "association": "ZO 36-Brno",
+    "memberNumber": "028529",
+    "youngExhibitor": false
+  }
+}

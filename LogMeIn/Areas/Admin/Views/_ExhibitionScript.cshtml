@@ -1,0 +1,73 @@
+@model LogMeIn.Models.ViewModels.ExhibitionVm
+<script>
+        let ownCage;
+        let sturdyCage;
+        let sturdyCage_show;
+        let doubleCage_show;
+        let doubleCage;
+        let attendance;
+    
+        let doubleCage_column;
+       
+        
+        function getPandas(regex) {
+          return Array.from(document.querySelectorAll('*')).filter(element => regex.test(element.id));
+        }
+        
+        function hideDoubleCage(instant) {
+            let timeout = 500
+            if (instant===true) {
+                timeout= 0
+            }
+    
+            if (ownCage.checked) {
+                sturdyCage_show.style.display = "flex";
+                sturdyCage_show.classList.remove("hide1");
+                sturdyCage_show.classList.add("show1");
+    
+                doubleCage.forEach(x => x.bootstrapToggle('off'));
+                doubleCage_column.forEach(x => x.classList.remove("show1"));
+                doubleCage_column.forEach(x => x.classList.add("hide1"));
+                setTimeout(() => {doubleCage_column.forEach(x => x.style.display = 'none');}, timeout);
+            } else {    
+                sturdyCage.bootstrapToggle('off');
+                sturdyCage_show.classList.remove("show1");
+                sturdyCage_show.classList.add("hide1");
+                setTimeout(() => {sturdyCage_show.style.display = 'none';}, timeout);
+                
+                doubleCage_column.forEach(x => x.style.display = "flex")
+                doubleCage_column.forEach(x => x.classList.remove("hide1"));
+                doubleCage_column.forEach(x => x.classList.add("show1"));
+            }
+        }
+        
+        function hideFees() {
+            for (let i = 0; i < attendance.length; i++) {
+                if (!attendance[i].checked) {
+                    doubleCage[i].bootstrapToggle('off');
+                    doubleCage[i].bootstrapToggle('disable');
+                } else {
+                    doubleCage[i].bootstrapToggle('enable');
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function () {
+             doubleCage_show = getPandas(new RegExp('^doubleCage_\\d_show\$')); // k ničemu
+                
+            ownCage = document.getElementById('ownCage');
+            sturdyCage = document.getElementById('sturdyFee');
+            sturdyCage_show = document.getElementById('sturdyFee_show');
+          
+            doubleCage_column = getPandas(new RegExp('^doubleCage_\\d_div\$'))
+            doubleCage_column.push(document.getElementById('doubleCage_0_head'))
+                    
+            doubleCage = getPandas(new RegExp('^doubleCage_\\d\$'));
+            attendance = getPandas(new RegExp('^attendance_\\d\$'));
+            
+            hideFees();
+            hideDoubleCage(true);
+            ownCage.addEventListener('change', hideDoubleCage);
+            attendance.forEach(x => x.addEventListener('change', hideFees));
+        });
+    </script>

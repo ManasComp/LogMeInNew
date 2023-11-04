@@ -1,0 +1,25 @@
+@model LogMeIn.Models.ViewModels.AdminPayInfo
+
+<div class="form-bacground">
+    <h1 class="text-center">Registrace @Model.Order.PersonRegistration.Exhibiter.FirstName</h1>
+    <h4 class="text-center">@Model.Order.PersonRegistration.Exhibition.Name</h4>
+
+
+    <div class="justify-content-center text-center">
+        <div >
+            <h3>Celková cena je: @Model.TotalPrice Kč</h3>
+
+        </div>
+        <div>
+            <strong>Objednáno:</strong> @Model.Order.Submitted
+
+        </div>
+        <div>
+            <strong>Zaplaceno:</strong> @Model.Order.OrderStatus
+        </div>
+        <a href=@("/Visitor/CatRegistration/DeletePerson/" + Model.PersonRegID)>Smazat vše</a>
+        <div class="step">
+            <partial name="_ViewPartial" Model="@Model"/>
+        </div>
+    </div>
+</div>

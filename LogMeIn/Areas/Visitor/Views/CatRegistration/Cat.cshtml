@@ -1,0 +1,84 @@
+@using LogMeIn.Utility
+@model  LogMeIn.Models.ViewModels.AdminVm
+
+<nav class="navbar sticky-top navbar-light bg-light px-3" data-bs-spy="scroll" sticky-top id="navbar-example2">
+    <a class="navbar-brand" href="#"></a>
+
+    @if (User.IsInRole(Roles.RoleAdmin.ToString()))
+    {
+        <a asp-area="Admin" asp-controller="Registration" asp-action="AllItemsByPersonReg" asp-route-personRegistrationId="@Model.PersonegID">Zpět</a>
+    }
+    else
+    {
+        <a asp-controller="CatRegistration" asp-action="PayInformation" asp-route-personRegistrationId="@Model.PersonegID">Zpět</a>
+    }
+
+    <a href=@("/Visitor/CatRegistration/UpsertCat/" + Model.RegId)>Upravit</a>
+    <a href=@("/Visitor/CatRegistration/DeleteCatReg/" + Model.RegId)>Odstranit</a>
+
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading1">Vystavovaná kočka</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading2">Otec</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading3">Matka</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading4">Výstava</a>
+        </li>
+    </ul>
+</nav>
+
+<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="row scrollspy-example" tabindex="0">
+
+
+    <div class="row">
+        <section id="scrollspyHeading1" class="row">
+            <h2 class="text-center">Vystavovaná kočka</h2>
+            <partial name="_ExhibitedPartial" Model="@Model.ExhibitedCatVm"/>
+            <hr style="  border-top: 8px solid #000000;
+                                         border-radius: 5px;">
+        </section>
+        <section id="scrollspyHeading2" class="row">
+            <h2 class="text-center">Otec</h2>
+            Pokud jsou všechna políčka prázdné, tak otec není znám.
+            <partial name="_CatPartial" Model="@Model.Father"/>
+            <hr style="  border-top: 8px solid #000000;
+                                                     border-radius: 5px;">
+        </section>
+        <section id="scrollspyHeading3" class="row">
+            <h2 class="text-center">Matka</h2>
+            Pokud jsou všechna políčka prázdné, tak matka není známa.
+            <partial name="_CatPartial" Model="@Model.Mother"/>
+            <hr style="  border-top: 8px solid #000000;
+                                                                 border-radius: 5px;">
+        </section>
+        <section id="scrollspyHeading4" class="row">
+            <h2 class="text-center">Výstava</h2>
+            <partial name="_ExhibitionParital" Model="@Model.Exhibition"/>
+        </section>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            placeholder: "Vyberte si kategorii",
+            allowClear: true,
+            closeOnSelect: true,
+            dropdownAutoWidth: true,
+            scrollAfterSelect: true,
+            disabled: @Model.Exhibition.Disabled.ToString().ToLower()
+        });
+    });
+    
+    var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+      target: '#navbar-example'
+    })
+    </script>
+}

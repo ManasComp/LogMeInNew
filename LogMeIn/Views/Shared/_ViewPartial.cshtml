@@ -1,0 +1,29 @@
+@model LogMeIn.Models.ViewModels.PayInfoVm
+
+<div class="justify-content-center text-center">
+    <div >
+        <h3>Celková cena je: @Model.TotalPrice Kč</h3>
+    </div>
+
+    <table class="table table-borderless">
+        <tbody>
+        <tr>
+            <td class="col-3">Registrace Uživatele</td>
+            <td>
+                <a asp-area="Visitor" asp-controller="CatRegistration" asp-action="PersonReg" asp-route-catRegistrationId="@Model.person.Id">Zobrazit</a>
+            </td>
+            <td>@Model.person.Price</td>
+        </tr>
+        @foreach (var item in Model.cats)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <a asp-area="Visitor" asp-controller="CatRegistration" asp-action="Cat" asp-route-catRegistrationId="@item.Id">Zobrazit</a>
+                </td>
+                <td>@item.Price</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,100 @@
+@model LogMeIn.Models.ViewModels.ExhibitionVm
+
+<div class="row py-3 col-md-6 align-items-center justify-content-center">
+    <div class="col-md-4 col-5">
+        <label asp-for="@Model.SelectedId">Výstavní skupiny</label>
+    </div>
+    <div class="col-md-8 col-12">
+        <select asp-items="@Model.Groups" asp-for="@Model.SelectedId" class="js-example-basic-multiple form-select disabled" multiple="multiple"></select>
+        <span asp-validation-for="@Model.SelectedId" class="text-danger"></span>
+    </div>
+
+</div>
+
+@for (var i = 0; i < Model.CatCompleteFees.Length; i++)
+{
+    <div class="row py-3 col-md-6 align-items-center justify-content-center" id="@(Model.CatCompleteFees[i].JavascriptId + "_show")">
+        <div class="col-sm-10 col-8">
+            <label>@Model.CatCompleteFees[i].LabelName</label>
+        </div>
+        <div class="col-sm-2 col-4">
+            <input disabled="@Model.Disabled" asp-for="@Model.CatCompleteFees[i].IsChecked"
+                   id="@Model.CatCompleteFees[i].JavascriptId"
+                   type="checkbox"
+                   data-toggle="toggle"
+                   data-onlabel="Ano"
+                   data-offlabel="Ne"
+                   data-onstyle="success"
+                   data-offstyle="danger"
+                   class="dayToggle">
+            <span asp-validation-for="@Model.CatCompleteFees[i].IsChecked" class="text-danger"></span>
+        </div>
+
+        <input disabled="@Model.Disabled" asp-for="@Model.CatCompleteFees[i].Id." type="hidden">
+        <input disabled="@Model.Disabled" asp-for="@Model.CatCompleteFees[i].LabelName" type="hidden">
+        <input disabled="@Model.Disabled" asp-for="@Model.CatCompleteFees[i].FeeId" type="hidden">
+    </div>
+}
+
+<div class="row py-3 col-md-6 align-items-center justify-content-center" id="targetElement2">
+    <table class="table table-sm table-borderless align-middle text-center table-hover">
+        <thead>
+        <tr>
+            <th scope="row">
+                Den
+            </th>
+            @for (var j = 0; j < Model.AttendanceOnDays[0].Count; j++)
+            {
+                <th scope="col" id="@(Model.AttendanceOnDays[0][j].JavascriptId + "_head")">@Model.AttendanceOnDays[0][j].LabelName </th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @for (var i = 0; i < Model.AttendanceOnDays.Count; i++)
+        {
+            //<input disabled="@Model.Disabled" asp-for="@Model.AttendanceOnDays[i]" type="hidden"/>
+            <tr >
+                <th scope="row">
+                    <div >
+                        @Model.Days[i]
+                    </div>
+
+                </th>
+                @for (var j = 0; j < Model.AttendanceOnDays[i].Count; j++)
+                {
+                    <div id="@(Model.AttendanceOnDays[i][j].JavascriptId + "_show")">
+                        <input disabled="@Model.Disabled" asp-for="@Model.AttendanceOnDays[i][j]" type="hidden"/>
+                        <th scope="row" id="@(Model.AttendanceOnDays[i][j].JavascriptId + "_div")">
+                            <div>
+                                <input disabled="@Model.Disabled" asp-for="@Model.AttendanceOnDays[i][j].IsChecked"
+                                       type="checkbox"
+                                       id="@Model.AttendanceOnDays[i][j].JavascriptId"
+                                       data-toggle="toggle"
+                                       data-onlabel="Ano"
+                                       data-offlabel="Ne"
+                                       data-onstyle="success"
+                                       data-offstyle="danger"
+                                       class="dayToggle">
+                                <span asp-validation-for="@Model.AttendanceOnDays[i][j].IsChecked" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </div>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row py-3 col-12 align-items-center justify-content-center">
+    <div class="col-md-3">
+        <label asp-for="@Model.Note" class="ms-2 my_text_muted">Poznámka</label>
+    </div>
+    <div class="form-floating col-md-9">
+        <textarea  disabled="@Model.Disabled" asp-for="@Model.Note" class="form-control" placeholder="545454">
+        </textarea>
+
+        <span asp-validation-for="@Model.Note" class="text-danger"></span>
+    </div>
+</div>
